@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KIR SMAN 2 Jakarta</title>
+
+    <!-- =====================================================
+       FONT IMPORTS
+       Ganti font sesuai selera di sini.
+       Saat ini menggunakan:
+       - "Syne" untuk heading (bold, modern)
+       - "DM Sans" untuk body text (bersih, readable)
+  ===================================================== -->
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700&display=swap"
+  rel="stylesheet"
+/>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- =====================================================
+       HALAMAN UTAMA (HOME)
+       Semua "halaman" ada di sini, ditampilkan/disembunyikan
+       via JavaScript dengan class .active-page
+  ===================================================== -->
+
+    <!-- =====================================================
+       NAVBAR
+       Ubah nama menu di sini jika ingin menambah/hapus item.
+       Setiap item navbar memanggil showPage('nama-halaman')
+  ===================================================== -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-logo" onclick="showPage('home')">
+        <!-- Ganti teks logo di sini -->
+        <span class="logo-badge"
+          ><img src="img/KIR-Logo-removebg-preview.png"
+        /></span>
+        <span class="logo-text">SMAN 2 Jakarta</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a
+            href="#"
+            onclick="showPage('home')"
+            data-page="home"
+            class="nav-link active"
+            >Beranda</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            onclick="showPage('tentang')"
+            data-page="tentang"
+            class="nav-link"
+            >Tentang Kami</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            onclick="showPage('kegiatan')"
+            data-page="kegiatan"
+            class="nav-link"
+            >Kegiatan</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            onclick="showPage('galeri')"
+            data-page="galeri"
+            class="nav-link"
+            >Galeri</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            onclick="showPage('blog')"
+            data-page="blog"
+            class="nav-link"
+            >Blog</a
+          >
+        </li>
+      </ul>
+      <!-- Tombol hamburger untuk mobile -->
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a
+        href="#"
+        onclick="
+          showPage('home');
+          closeMobileMenu();
+        "
+        >Beranda</a
+      >
+      <a
+        href="#"
+        onclick="
+          showPage('tentang');
+          closeMobileMenu();
+        "
+        >Tentang Kami</a
+      >
+      <a
+        href="#"
+        onclick="
+          showPage('kegiatan');
+          closeMobileMenu();
+        "
+        >Kegiatan</a
+      >
+      <a
+        href="#"
+        onclick="
+          showPage('galeri');
+          closeMobileMenu();
+        "
+        >Galeri</a
+      >
+      <a
+        href="#"
+        onclick="
+          showPage('blog');
+          closeMobileMenu();
+        "
+        >Blog</a
+      >
+    </div>
+
+    <!-- =====================================================
+       HALAMAN: HOME
+  ===================================================== -->
+    <main id="page-home" class="page active-page">
+      <!-- ===== HEADER STYLE TWITTER PROFILE ===== -->
+      <!-- 
+      CARA MODIFIKASI HEADER:
+      1. Ganti URL gambar banner di CSS (.profile-banner background-image)
+      2. Ganti teks nama, username, bio di bawah ini
+      3. Ganti angka statistik (karya, anggota, tahun berdiri)
+    -->
+      <section class="profile-header">
+        <!-- Banner / Cover Photo -->
+        <div class="profile-banner">
+          <img src="img/banner.jpeg" alt="profile banner" />
+          </div>
+          <div class="banner-overlay"></div>
+          <!-- Teks hero di atas banner (opsional) -->
+          <div class="banner-tagline">Eksplorasi · Inovasi · Inspirasi</div>
+        </div>
+
+        <!-- Area profil (avatar + tombol) -->
+        <div class="profile-top-bar">
+          <!-- 
+          AVATAR: Ganti src="" dengan URL foto logo KIR 
+          Saat ini menggunakan placeholder inisial
+        -->
+          <div class="profile-avatar"><img src="img/KIR-Logo.jpeg" /></div>
+          <div class="profile-actions">
+            <button class="btn-outline" onclick="showPage('tentang')">
+              Tentang Kami
+            </button>
+            <button class="btn-primary" onclick="showPage('blog')">
+              Baca Blog
+            </button>
+          </div>
+        </div>
+
+        <!-- Info profil -->
+        <div class="profile-info">
+          <!-- Ganti nama & username di bawah -->
+          <h1 class="profile-name">KIR SMAN 2 Jakarta</h1>
+          <p class="profile-handle">@nitrokir</p>
+          <p class="profile-bio">
+            <!-- Ganti deskripsi singkat KIR di sini -->
+            NitroKIR Divisi Penelitian <br />
+            NitroKIR Divisi IT Coding<br />
+            NitroKIR Divisi IT Design<br />
+            NitroKIR Divisi Pertanian<br />
+          </p>
+
+          <!-- Meta info (lokasi, link, dsb) -->
+          <div class="profile-meta">
+            <span>📍 Jakarta, Indonesia</span>
+            <!-- Ganti tahun berdiri jika perlu -->
+            <span>🗓 Berdiri sejak 1995</span>
+            <!-- Ganti URL website jika ada -->
+            <span>🔗 sman2jkt.sch.id</span>
+          </div>
+
+          <!-- Statistik -->
+          <div class="profile-stats">
+            <!-- Ganti angka sesuai data nyata -->
+            <div class="stat-item">
+              <span class="stat-num">120+</span>
+              <span class="stat-label">Karya Ilmiah</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">85</span>
+              <span class="stat-label">Anggota Aktif</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">31</span>
+              <span class="stat-label">Tahun Berdiri</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">30+</span>
+              <span class="stat-label">Penghargaan</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== KONTEN FEED (seperti Twitter timeline) ===== -->
+      <section class="feed-section">
+        <div class="feed-tabs">
+          <!-- Tab filter bisa dikembangkan -->
+          <button class="feed-tab active">Terbaru</button>
+          <button class="feed-tab">Populer</button>
+          <button class="feed-tab">Pinned</button>
+        </div>
+
+        <!-- Feed cards / post preview -->
+        <div class="feed-container">
+          <!-- 
+          FEED CARD
+          Duplikat blok .feed-card untuk menambah postingan.
+          Ganti: kategori, judul, isi, tanggal, tag.
+          Klik baca selengkapnya akan membuka halaman blog.
+        -->
+          <article class="feed-card pinned">
+            <div class="card-pin-badge">📌 Dipin</div>
+            <div class="card-category">Pengumuman</div>
+            <h3 class="card-title">
+              Pendaftaran Anggota Baru KIR 2024/2025 Dibuka!
+            </h3>
+            <p class="card-excerpt">
+              Halo calon peneliti muda! KIR SMAN 2 Jakarta kembali membuka
+              pendaftaran anggota baru untuk tahun ajaran 2024/2025.
+              Bergabunglah dan jadilah bagian dari komunitas ilmiah terbaik.
+            </p>
+            <div class="card-footer">
+              <span class="card-date">21 April 2025</span>
+              <div class="card-tags">
+                <span class="tag">Rekrutmen</span>
+                <span class="tag">2024</span>
+              </div>
+              <button class="btn-read" onclick="openBlogPost('post-1')">
+                Baca Selengkapnya →
+              </button>
+            </div>
+          </article>
+
+          <article class="feed-card">
+            <div class="card-category">Prestasi</div>
+            <h3 class="card-title">KIR Raih Juara 1 LKIR Nasional 2024</h3>
+            <p class="card-excerpt">
+              Tim peneliti KIR SMAN 2 Jakarta berhasil meraih juara pertama
+              dalam Lomba Karya Ilmiah Remaja tingkat Nasional dengan penelitian
+              inovatif di bidang bioteknologi lingkungan.
+            </p>
+            <div class="card-footer">
+              <span class="card-date">10 April 2025</span>
+              <div class="card-tags">
+                <span class="tag">Prestasi</span>
+                <span class="tag">LKIR</span>
+              </div>
+              <button class="btn-read" onclick="openBlogPost('post-2')">
+                Baca Selengkapnya →
+              </button>
+            </div>
+            img
+          </article>
+
+          <article class="feed-card">
+            <div class="card-category">Kegiatan</div>
+            <h3 class="card-title">
+              Workshop Metode Penelitian Ilmiah bersama UI
+            </h3>
+            <p class="card-excerpt">
+              Anggota KIR mengikuti workshop intensif tentang metodologi
+              penelitian yang dipimpin oleh dosen dari Universitas Indonesia.
+              Kegiatan berlangsung selama dua hari penuh.
+            </p>
+            <div class="card-footer">
+              <span class="card-date">2 Maret 2025</span>
+              <div class="card-tags">
+                <span class="tag">Workshop</span>
+                <span class="tag">Kolaborasi</span>
+              </div>
+              <button class="btn-read" onclick="openBlogPost('post-3')">
+                Baca Selengkapnya →
+              </button>
+            </div>
+          </article>
+        </div>
+        <!-- end .feed-container -->
+      </section>
+    </main>
+    <!-- end page-home -->
+
+    <!-- =====================================================
+       HALAMAN: TENTANG KAMI
+  ===================================================== -->
+    <main id="page-tentang" class="page">
+      <div class="inner-page-header">
+        <h1>Tentang Kami</h1>
+        <p>Mengenal KIR SMAN 2 Jakarta lebih dekat</p>
+      </div>
+
+      <div class="content-wrapper">
+        <!-- Visi Misi -->
+        <section class="about-section">
+          <div class="section-label">Identitas</div>
+          <h2>Siapa Kami?</h2>
+          <!-- Ganti paragraf ini sesuai profil KIR -->
+          <p>
+            Kelompok Ilmiah Remaja (KIR) SMAN 2 Jakarta adalah organisasi
+            ekstrakurikuler yang berfokus pada pengembangan minat dan bakat
+            siswa di bidang penelitian ilmiah, teknologi, dan inovasi. Didirikan
+            sejak tahun 1980, KIR telah melahirkan ratusan peneliti muda
+            berbakat yang kini berkarier di berbagai bidang.
+          </p>
+          <p>
+            Kami percaya bahwa rasa ingin tahu adalah benih ilmu pengetahuan.
+            Melalui program penelitian, seminar, dan kompetisi ilmiah, kami
+            menumbuhkan generasi yang kritis, analitis, dan inovatif.
+          </p>
+        </section>
+
+        <!-- Visi Misi Card -->
+        <div class="visi-misi-grid">
+          <div class="vm-card">
+            <div class="vm-icon">🔭</div>
+            <h3>Visi</h3>
+            <!-- Ganti visi di sini -->
+            <p>
+              Menjadi kelompok ilmiah remaja terdepan yang melahirkan inovator
+              muda berdampak bagi masyarakat Indonesia.
+            </p>
+          </div>
+          <div class="vm-card">
+            <div class="vm-icon">🎯</div>
+            <h3>Misi</h3>
+            <!-- Ganti misi di sini -->
+            <ul>
+              <li>Mengembangkan budaya riset di kalangan pelajar</li>
+              <li>Mendorong kolaborasi lintas disiplin ilmu</li>
+              <li>Meningkatkan partisipasi dalam kompetisi ilmiah</li>
+              <li>Membangun jaringan dengan institusi akademik</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Struktur Organisasi -->
+        <section class="about-section">
+          <div class="section-label">Organisasi</div>
+          <h2>Struktur Pengurus 2024/2025</h2>
+          <div class="pengurus-grid">
+            <!-- Duplikat .pengurus-card untuk menambah anggota -->
+            <!-- Ganti nama, jabatan, dan inisial avatar -->
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">RA</div>
+              <div class="pengurus-info">
+                <strong>Rizky Aditya</strong>
+                <span>Ketua Umum</span>
+              </div>
+            </div>
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">SA</div>
+              <div class="pengurus-info">
+                <strong>Sari Andini</strong>
+                <span>Wakil Ketua</span>
+              </div>
+            </div>
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">MF</div>
+              <div class="pengurus-info">
+                <strong>Muhammad Fauzan</strong>
+                <span>Sekretaris</span>
+              </div>
+            </div>
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">NR</div>
+              <div class="pengurus-info">
+                <strong>Nadia Rahma</strong>
+                <span>Bendahara</span>
+              </div>
+            </div>
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">DP</div>
+              <div class="pengurus-info">
+                <strong>Dika Prasetya</strong>
+                <span>Koordinator Riset</span>
+              </div>
+            </div>
+            <div class="pengurus-card">
+              <div class="pengurus-avatar">LK</div>
+              <div class="pengurus-info">
+                <strong>Lila Kusuma</strong>
+                <span>Humas & Media</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- end .content-wrapper -->
+    </main>
+    <!-- end page-tentang -->
+
+    <!-- =====================================================
+       HALAMAN: KEGIATAN
+  ===================================================== -->
+    <main id="page-kegiatan" class="page">
+      <div class="inner-page-header">
+        <h1>Kegiatan</h1>
+        <p>Program dan agenda KIR SMAN 2 Jakarta</p>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="kegiatan-grid">
+          <!-- 
+          KEGIATAN CARD
+          Duplikat .kegiatan-card untuk menambah kegiatan.
+          Ganti: emoji ikon, judul, deskripsi, tanggal, badge status.
+          Status: "Mendatang" / "Berlangsung" / "Selesai"
+        -->
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">🔬</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-upcoming">Mendatang</span>
+              <h3>Seminar Nasional Ilmu Pengetahuan</h3>
+              <p>
+                Seminar tahunan KIR yang menghadirkan pembicara dari berbagai
+                universitas terkemuka di Indonesia. Terbuka untuk seluruh siswa.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 15 Mei 2025</span>
+                <span>📍 Aula SMAN 2 Jakarta</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">🏆</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-ongoing">Berlangsung</span>
+              <h3>LKIR Internal 2025</h3>
+              <p>
+                Lomba Karya Ilmiah Remaja tingkat internal SMAN 2 Jakarta
+                sebagai seleksi perwakilan ke kompetisi nasional.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 Apr – Jun 2025</span>
+                <span>📍 SMAN 2 Jakarta</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">💻</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-done">Selesai</span>
+              <h3>Workshop AI & Data Science</h3>
+              <p>
+                Pelatihan intensif pengenalan kecerdasan buatan dan analisis
+                data untuk anggota KIR bersama mentor dari industri teknologi.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 20 Maret 2025</span>
+                <span>📍 Lab Komputer SMAN 2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">🌿</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-done">Selesai</span>
+              <h3>Ekspedisi Riset Alam Ciawi</h3>
+              <p>
+                Penelitian lapangan ekosistem sungai dan keanekaragaman hayati
+                di kawasan Ciawi, Bogor bersama 30 anggota KIR.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 8 Februari 2025</span>
+                <span>📍 Ciawi, Bogor</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">📊</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-upcoming">Mendatang</span>
+              <h3>Pameran Karya Ilmiah 2025</h3>
+              <p>
+                Pameran hasil penelitian anggota KIR yang terbuka untuk seluruh
+                warga sekolah dan tamu undangan.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 1 Juli 2025</span>
+                <span>📍 Lapangan SMAN 2 Jakarta</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="kegiatan-card">
+            <div class="kegiatan-icon">🤝</div>
+            <div class="kegiatan-body">
+              <span class="kegiatan-badge badge-upcoming">Mendatang</span>
+              <h3>Kunjungan Industri BRIN</h3>
+              <p>
+                Kunjungan ke Badan Riset dan Inovasi Nasional (BRIN) untuk
+                memperluas wawasan anggota tentang ekosistem riset Indonesia.
+              </p>
+              <div class="kegiatan-meta">
+                <span>📅 10 Juni 2025</span>
+                <span>📍 Cibinong, Bogor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end .kegiatan-grid -->
+      </div>
+    </main>
+    <!-- end page-kegiatan -->
+
+    <!-- =====================================================
+       HALAMAN: GALERI
+  ===================================================== -->
+    <main id="page-galeri" class="page">
+      <div class="inner-page-header">
+        <h1>Galeri</h1>
+        <p>Momen dan dokumentasi kegiatan KIR</p>
+      </div>
+
+      <div class="content-wrapper">
+        <!-- Filter galeri -->
+        <div class="galeri-filter">
+          <!-- Ganti teks filter sesuai kategori foto yang ada -->
+          <button class="filter-btn active" onclick="filterGaleri('all', this)">
+            Semua
+          </button>
+          <button class="filter-btn" onclick="filterGaleri('kompetisi', this)">
+            Kompetisi
+          </button>
+          <button class="filter-btn" onclick="filterGaleri('kegiatan', this)">
+            Kegiatan
+          </button>
+          <button class="filter-btn" onclick="filterGaleri('workshop', this)">
+            Workshop
+          </button>
+        </div>
+
+        <!-- Grid foto galeri -->
+        <!-- 
+        CARA MENAMBAH FOTO:
+        1. Duplikat blok .galeri-item
+        2. Ganti data-category dengan kategori yang sesuai
+        3. Ganti background di style="" dengan URL foto asli
+           Contoh: style="background-image: url('foto/nama-file.jpg')"
+        4. Ganti teks caption
+      -->
+        <div class="galeri-grid" id="galeriGrid">
+          <div class="galeri-item" data-category="kompetisi">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #1a4a6e, #2d8a6e)"
+            >
+              <div class="galeri-placeholder">🏆</div>
+            </div>
+            <p class="galeri-caption">Juara LKIR Nasional 2024</p>
+          </div>
+
+          <div class="galeri-item galeri-wide" data-category="kegiatan">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #4a1a6e, #8a2d6e)"
+            >
+              <div class="galeri-placeholder">🔬</div>
+            </div>
+            <p class="galeri-caption">Seminar Nasional 2024</p>
+          </div>
+
+          <div class="galeri-item" data-category="workshop">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #6e4a1a, #6e8a2d)"
+            >
+              <div class="galeri-placeholder">💻</div>
+            </div>
+            <p class="galeri-caption">Workshop AI & Data Science</p>
+          </div>
+
+          <div class="galeri-item" data-category="kegiatan">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #1a6e4a, #2d6e8a)"
+            >
+              <div class="galeri-placeholder">🌿</div>
+            </div>
+            <p class="galeri-caption">Ekspedisi Riset Ciawi</p>
+          </div>
+
+          <div class="galeri-item galeri-tall" data-category="kompetisi">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #6e1a1a, #6e6e2d)"
+            >
+              <div class="galeri-placeholder">🎖</div>
+            </div>
+            <p class="galeri-caption">Podium OPSI 2024</p>
+          </div>
+
+          <div class="galeri-item" data-category="workshop">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #1a1a6e, #6e2d8a)"
+            >
+              <div class="galeri-placeholder">📊</div>
+            </div>
+            <p class="galeri-caption">Pelatihan Statistika</p>
+          </div>
+
+          <div class="galeri-item galeri-wide" data-category="kegiatan">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #2d6e1a, #6e8a1a)"
+            >
+              <div class="galeri-placeholder">📸</div>
+            </div>
+            <p class="galeri-caption">Foto Bersama Pengurus 2024/2025</p>
+          </div>
+
+          <div class="galeri-item" data-category="kompetisi">
+            <div
+              class="galeri-img"
+              style="background: linear-gradient(135deg, #6e2d1a, #8a6e1a)"
+            >
+              <div class="galeri-placeholder">🥇</div>
+            </div>
+            <p class="galeri-caption">LKIS Regional DKI 2024</p>
+          </div>
+        </div>
+        <!-- end .galeri-grid -->
+      </div>
+    </main>
+    <!-- end page-galeri -->
+
+    <!-- =====================================================
+       HALAMAN: BLOG (Daftar Artikel)
+  ===================================================== -->
+    <main id="page-blog" class="page">
+      <div class="inner-page-header">
+        <h1>Blog</h1>
+        <p>Artikel, opini, dan laporan kegiatan KIR</p>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="blog-list">
+          <!-- 
+          BLOG LIST ITEM
+          Duplikat .blog-list-item untuk menambah artikel.
+          Ganti: kategori, judul, excerpt, penulis, tanggal, tag,
+          dan pastikan onclick openBlogPost('id-unik') sesuai
+          dengan ID post di halaman blog-detail di bawah.
+        -->
+          <article class="blog-list-item" onclick="openBlogPost('post-1')">
+            <div
+              class="blog-thumb"
+              style="background: linear-gradient(135deg, #0f2a4a, #1a5c3a)"
+            >
+              <span>📢</span>
+            </div>
+            <div class="blog-info">
+              <span class="blog-category">Pengumuman</span>
+              <h3>Pendaftaran Anggota Baru KIR 2024/2025 Dibuka!</h3>
+              <p>
+                KIR SMAN 2 Jakarta kembali membuka pendaftaran anggota baru
+                untuk tahun ajaran 2024/2025. Bergabunglah dan jadilah bagian
+                dari komunitas ilmiah...
+              </p>
+              <div class="blog-meta">
+                <span>✍️ Admin KIR</span>
+                <span>📅 21 April 2025</span>
+                <span class="tag">Rekrutmen</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-list-item" onclick="openBlogPost('post-2')">
+            <div
+              class="blog-thumb"
+              style="background: linear-gradient(135deg, #4a2a0a, #1a4a5c)"
+            >
+              <span>🏆</span>
+            </div>
+            <div class="blog-info">
+              <span class="blog-category">Prestasi</span>
+              <h3>KIR Raih Juara 1 LKIR Nasional 2024</h3>
+              <p>
+                Tim peneliti KIR SMAN 2 Jakarta berhasil meraih juara pertama
+                dalam Lomba Karya Ilmiah Remaja tingkat Nasional dengan
+                penelitian inovatif...
+              </p>
+              <div class="blog-meta">
+                <span>✍️ Humas KIR</span>
+                <span>📅 10 April 2025</span>
+                <span class="tag">Prestasi</span>
+                <span class="tag">LKIR</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-list-item" onclick="openBlogPost('post-3')">
+            <div
+              class="blog-thumb"
+              style="background: linear-gradient(135deg, #2a0a4a, #0a4a2a)"
+            >
+              <span>🎓</span>
+            </div>
+            <div class="blog-info">
+              <span class="blog-category">Kegiatan</span>
+              <h3>Workshop Metode Penelitian Ilmiah bersama UI</h3>
+              <p>
+                Anggota KIR mengikuti workshop intensif tentang metodologi
+                penelitian yang dipimpin oleh dosen dari Universitas Indonesia
+                selama dua hari...
+              </p>
+              <div class="blog-meta">
+                <span>✍️ Dika Prasetya</span>
+                <span>📅 2 Maret 2025</span>
+                <span class="tag">Workshop</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-list-item" onclick="openBlogPost('post-4')">
+            <div
+              class="blog-thumb"
+              style="background: linear-gradient(135deg, #0a4a4a, #4a4a0a)"
+            >
+              <span>🌿</span>
+            </div>
+            <div class="blog-info">
+              <span class="blog-category">Riset</span>
+              <h3>Laporan Ekspedisi Riset Alam Ciawi 2025</h3>
+              <p>
+                Dokumentasi lengkap ekspedisi riset ekosistem sungai dan
+                keanekaragaman hayati di kawasan Ciawi, Bogor yang diikuti 30
+                anggota KIR...
+              </p>
+              <div class="blog-meta">
+                <span>✍️ Tim Riset KIR</span>
+                <span>📅 15 Februari 2025</span>
+                <span class="tag">Ekspedisi</span>
+                <span class="tag">Riset</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- end .blog-list -->
+      </div>
+    </main>
+    <!-- end page-blog -->
+
+    <!-- =====================================================
+       HALAMAN: DETAIL BLOG POST
+       Halaman ini ditampilkan ketika user klik "Baca Selengkapnya"
+       Konten diisi via JavaScript berdasarkan ID post yang diklik
+  ===================================================== -->
+    <main id="page-blog-detail" class="page">
+      <div class="content-wrapper">
+        <button class="btn-back" onclick="goBackToBlog()">
+          ← Kembali ke Blog
+        </button>
+        <!-- Konten artikel akan dimasukkan di sini oleh JS -->
+        <div id="blogPostContent"></div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+       FOOTER
+       Ganti info kontak, sosial media, dan copyright di sini
+  ===================================================== -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-badge">KIR</span>
+          <div>
+            <strong>KIR SMAN 2 Jakarta</strong>
+            <!-- Ganti tagline footer -->
+            <p>Kelompok Ilmiah Remaja · Eksplorasi tanpa batas</p>
+          </div>
+        </div>
+        <div class="footer-links">
+          <!-- Ganti link sosial media -->
+          <a href="#" aria-label="Instagram">📸 Instagram</a>
+          <a href="#" aria-label="YouTube">▶️ YouTube</a>
+          <a href="#" aria-label="Email">✉️ Email</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <!-- Ganti tahun dan nama sekolah -->
+        © 2025 KIR SMAN 2 Jakarta. Hak Cipta Dilindungi.
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

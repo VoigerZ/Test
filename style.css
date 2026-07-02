@@ -1,0 +1,1696 @@
+/* =====================================================
+   STYLE.CSS — KIR SMAN 2 JAKARTA
+   
+   DAFTAR ISI:
+   1. CSS Variables (warna, font, ukuran) ← UBAH DI SINI
+   2. Reset & Base
+   3. Navbar
+   4. Mobile Menu
+   5. Header Profile (Twitter-style)
+   6. Feed / Timeline (Home)
+   7. Halaman Inner (Tentang, Kegiatan, Galeri, Blog)
+   8. Tentang Kami
+   9. Kegiatan
+   10. Galeri
+   11. Blog List
+   12. Blog Detail
+   13. Footer
+   14. Animations
+   15. Responsive (Mobile)
+===================================================== */
+
+/* =====================================================
+   1. CSS VARIABLES — MODIFIKASI UTAMA DI SINI
+   Ganti nilai variable untuk mengubah tema situs
+===================================================== */
+:root {
+  --color-primary: #7ecec4;
+  --color-primary-dk: #5ab8ac;
+  --color-secondary: #c9a227;
+
+  /* --- Background hitam murni --- */
+  --bg-page: #000000;
+  --bg-card: #0d0d0d;
+  --bg-card-hov: #151515;
+  --bg-nav: rgba(0, 0, 0, 0.95);
+  --bg-banner: #000000;
+
+  /* --- Teks --- */
+  --text-primary: #f0eeff;
+  --text-secondary: #b0a0d0;
+  --text-muted: #5a4a7a;
+  --text-accent: #7ecec4;
+
+  /* --- Border --- */
+  --border-color: rgba(126, 206, 196, 0.1);
+  --border-hover: rgba(126, 206, 196, 0.4);
+
+  --font-heading: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+
+  --navbar-h: 64px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 28px rgba(126, 206, 196, 0.15);
+
+  /* Banner: warna-warna logo di atas hitam */
+  --banner-gradient: linear-gradient(
+    135deg,
+    #000000 0%,
+    #1a0a2e 20%,
+    #0a2a3a 45%,
+    #0a2820 70%,
+    #1a1400 100%
+  );
+}
+
+/* ===== OVERRIDE ===== */
+
+body {
+  background-image: none;
+}
+
+.navbar {
+  border-bottom: 1px solid rgba(126, 206, 196, 0.08);
+  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.8);
+}
+
+.logo-text {
+  color: #f0eeff;
+}
+
+/* Avatar warna ungu + toska dari logo */
+.profile-avatar {
+  border-color: #000000;
+  background: linear-gradient(135deg, #7b5ea7, #7ecec4);
+}
+
+/* Banner: titik-titik bintang dekoratif */
+.profile-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, #7b5ea7 1px, transparent 1px),
+    radial-gradient(circle, #7ecec4 1px, transparent 1px),
+    radial-gradient(circle, #c9a227 1px, transparent 1px);
+  background-size:
+    80px 80px,
+    120px 120px,
+    60px 60px;
+  background-position:
+    10px 10px,
+    40px 40px,
+    70px 20px;
+  opacity: 0.12;
+}
+
+.stat-num {
+  color: #7ecec4;
+}
+
+/* Tag toska */
+.tag {
+  background: rgba(126, 206, 196, 0.1);
+  color: #7ecec4;
+}
+
+/* Kartu pinned kuning emas */
+.feed-card.pinned {
+  border-color: rgba(201, 162, 39, 0.3);
+  background: rgba(201, 162, 39, 0.03);
+}
+.card-pin-badge {
+  color: #c9a227;
+}
+
+/* Kategori kartu */
+.card-category {
+  color: #7ecec4;
+}
+
+/* Tombol baca */
+.btn-read {
+  color: #7ecec4;
+  border-color: rgba(126, 206, 196, 0.25);
+}
+.btn-read:hover {
+  background: rgba(126, 206, 196, 0.08);
+  border-color: #7ecec4;
+}
+
+/* Badge kegiatan */
+.badge-upcoming {
+  background: rgba(126, 206, 196, 0.1);
+  color: #7ecec4;
+}
+.badge-ongoing {
+  background: rgba(201, 162, 39, 0.12);
+  color: #c9a227;
+}
+.badge-done {
+  background: rgba(123, 94, 167, 0.12);
+  color: #9a7ec8;
+}
+
+/* Heading inner page: ungu → toska → kuning */
+.inner-page-header h1 {
+  background: linear-gradient(135deg, #c9a8f0 0%, #7ecec4 50%, #c9a227 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-label {
+  color: #7ecec4;
+}
+
+/* Visi misi */
+.vm-card {
+  background: #0d0d0d;
+  border-color: rgba(123, 94, 167, 0.2);
+}
+.vm-card:hover {
+  border-color: rgba(126, 206, 196, 0.35);
+}
+
+/* Pengurus avatar */
+.pengurus-avatar {
+  background: linear-gradient(135deg, #7b5ea7, #7ecec4);
+  color: #000;
+}
+
+/* Kegiatan */
+.kegiatan-icon {
+  background: rgba(126, 206, 196, 0.06);
+}
+.kegiatan-card:hover {
+  border-color: rgba(126, 206, 196, 0.3);
+}
+
+/* Filter galeri */
+.filter-btn {
+  border-color: rgba(123, 94, 167, 0.3);
+  color: #b0a0d0;
+}
+.filter-btn:hover {
+  border-color: #7b5ea7;
+  color: #f0eeff;
+}
+.filter-btn.active {
+  background: #7b5ea7;
+  border-color: #7b5ea7;
+  color: #fff;
+}
+
+/* Blog */
+.blog-list-item:hover {
+  background: rgba(126, 206, 196, 0.03);
+}
+.blog-category {
+  color: #7ecec4;
+}
+.post-category {
+  color: #7ecec4;
+}
+.post-title {
+  color: #f0eeff;
+}
+.btn-back {
+  color: #7ecec4;
+}
+
+/* Blockquote */
+.post-body blockquote {
+  border-left-color: #7b5ea7;
+  color: #9a7ec8;
+}
+
+/* Nav link active */
+.nav-link.active {
+  color: #7ecec4;
+  background: rgba(126, 206, 196, 0.08);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  background: #0d0d0d;
+  border-bottom-color: rgba(126, 206, 196, 0.08);
+}
+.mobile-menu a:hover {
+  color: #7ecec4;
+}
+
+/* Feed tabs */
+.feed-tab.active {
+  color: #7ecec4;
+  border-bottom-color: #7ecec4;
+}
+
+/* Footer */
+.footer {
+  background: #0d0d0d;
+  border-top-color: rgba(126, 206, 196, 0.08);
+}
+.footer-links a:hover {
+  color: #7ecec4;
+}
+.footer-bottom {
+  border-top-color: rgba(126, 206, 196, 0.06);
+}
+/* ===== OVERRIDE DARK MODE BERNUANSA LOGO ===== */
+
+body {
+  background-image: none;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 1px solid rgba(126, 206, 196, 0.1);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+.logo-text {
+  color: #f0eeff;
+}
+
+/* Avatar */
+.profile-avatar {
+  border-color: #12101e;
+  background: linear-gradient(135deg, #7b5ea7, #7ecec4);
+}
+
+/* Stat numbers warna toska */
+.stat-num {
+  color: #7ecec4;
+}
+
+/* Tag */
+.tag {
+  background: rgba(126, 206, 196, 0.1);
+  color: #7ecec4;
+}
+
+/* Feed card */
+.feed-card {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Card pinned warna kuning emas */
+.feed-card.pinned {
+  border-color: rgba(201, 162, 39, 0.25);
+  background: rgba(201, 162, 39, 0.03);
+}
+.card-pin-badge {
+  color: #c9a227;
+}
+
+/* Badge kegiatan */
+.badge-upcoming {
+  background: rgba(126, 206, 196, 0.12);
+  color: #7ecec4;
+}
+.badge-ongoing {
+  background: rgba(201, 162, 39, 0.14);
+  color: #c9a227;
+}
+.badge-done {
+  background: rgba(100, 90, 130, 0.15);
+  color: #7a6a9a;
+}
+
+/* Inner page header */
+.inner-page-header h1 {
+  background: linear-gradient(135deg, #c9a8f0, #7ecec4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section label */
+.section-label {
+  color: #7ecec4;
+}
+
+/* Visi misi card */
+.vm-card {
+  background: #1c1830;
+  border-color: rgba(126, 206, 196, 0.12);
+}
+
+/* Pengurus avatar gradient ungu-toska */
+.pengurus-avatar {
+  background: linear-gradient(135deg, #7b5ea7, #7ecec4);
+}
+
+/* Kegiatan icon */
+.kegiatan-icon {
+  background: rgba(126, 206, 196, 0.08);
+}
+
+/* Filter galeri */
+.filter-btn {
+  border-color: rgba(126, 206, 196, 0.2);
+  color: #b0a0d0;
+}
+.filter-btn:hover {
+  border-color: rgba(126, 206, 196, 0.5);
+  color: #f0eeff;
+}
+.filter-btn.active {
+  background: #7ecec4;
+  border-color: #7ecec4;
+  color: #12101e;
+}
+
+/* Blog list item hover */
+.blog-list-item:hover {
+  background: rgba(126, 206, 196, 0.04);
+}
+
+/* Blog category */
+.blog-category {
+  color: #7ecec4;
+}
+
+/* Post title */
+.post-title {
+  color: #f0eeff;
+}
+
+/* Tombol back */
+.btn-back {
+  color: #7ecec4;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  background: #1c1830;
+  border-bottom-color: rgba(126, 206, 196, 0.1);
+}
+.mobile-menu a:hover {
+  color: #7ecec4;
+}
+
+/* Footer */
+.footer {
+  background: #1c1830;
+  border-top-color: rgba(126, 206, 196, 0.1);
+}
+.footer-links a:hover {
+  color: #7ecec4;
+}
+/* =====================================================
+   2. RESET & BASE
+===================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  /* Grain texture overlay — hapus baris ini jika tidak mau efek grain */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Sembunyikan semua halaman kecuali yang aktif */
+.page {
+  display: none;
+}
+.page.active-page {
+  display: block;
+}
+
+/* =====================================================
+   3. NAVBAR
+===================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--navbar-h);
+  background: var(--bg-nav);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  /* Ganti padding untuk mengatur jarak kiri-kanan navbar */
+}
+
+/* Logo KIR di navbar */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Badge "KIR" kotak di logo */
+.logo-badge {
+  width: 40px;
+  border-radius: 6px;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  /* Ganti warna teks logo navbar */
+  color: var(--text-primary);
+}
+
+/* Link navigasi */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Gaya link aktif (halaman yang sedang dibuka) */
+.nav-link.active {
+  color: var(--color-primary);
+  background: rgba(20, 184, 166, 0.1);
+}
+
+/* Tombol hamburger — hanya muncul di mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* =====================================================
+   4. MOBILE MENU
+===================================================== */
+.mobile-menu {
+  display: none; /* Aktif via JS (class .open) */
+  position: fixed;
+  top: var(--navbar-h);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 999;
+  padding: 16px 0;
+  animation: slideDown 0.2s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-menu a {
+  padding: 12px 32px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+
+.mobile-menu a:hover {
+  color: var(--color-primary);
+  background: rgba(20, 184, 166, 0.06);
+}
+
+/* =====================================================
+   5. HEADER PROFILE — GAYA TWITTER
+   
+   Bagian ini adalah header utama di halaman Home.
+   Strukturnya mirip profil Twitter/X:
+   - Banner (cover photo)
+   - Avatar bulat yang overlap ke banner
+   - Nama, username, bio, meta info, statistik
+===================================================== */
+
+/* Wrapper seluruh section profile */
+.profile-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-bottom: 24px;
+}
+
+/* --- BANNER / COVER PHOTO ---
+   CARA GANTI GAMBAR BANNER:
+   Hapus background dan tambahkan:
+   background-image: url('path/ke/gambar-banner.jpg');
+   background-size: cover;
+   background-position: center;
+*/
+.profile-banner {
+  position: relative;
+  height: 200px; /* Ganti angka ini untuk ubah tinggi banner */
+  overflow: hidden;
+}
+
+/* Overlay gelap semi-transparan di atas banner */
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  /* Hapus baris ini jika tidak mau overlay */
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(10, 15, 26, 0.6) 100%
+  );
+}
+
+/* Teks tagline di tengah banner */
+.banner-tagline {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  /* Ganti atau hapus untuk mengubah teks di banner */
+  white-space: nowrap;
+}
+
+/* --- AREA AVATAR & TOMBOL ---
+   Baris yang berisi foto profil (kiri) dan tombol aksi (kanan)
+*/
+.profile-top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-top: -40px; /* Geser avatar naik melampaui banner */
+  position: relative;
+  z-index: 2;
+}
+
+/* Wrapper avatar (diperlukan untuk border putih) */
+.profile-avatar {
+  width: 150px; /* Ganti ukuran avatar di sini */
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid var(--bg-page); /* Border warna bg supaya terlihat terpisah dari banner */
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-glow);
+  /*
+    CARA PAKAI FOTO:
+    Tambahkan elemen <img src="logo.png" alt="KIR"> di dalam .profile-avatar
+    dan hapus .avatar-inner
+  */
+}
+
+/* Tombol-tombol aksi di kanan atas profil */
+.profile-actions {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+/* Tombol outline (border saja) */
+.btn-outline {
+  padding: 8px 16px;
+  border: 1.5px solid var(--border-hover);
+  border-radius: 20px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  background: rgba(20, 184, 166, 0.08);
+}
+
+/* Tombol solid (terisi warna) */
+.btn-primary {
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: #000;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+.btn-primary:hover {
+  background: var(--color-primary-dk);
+  transform: translateY(-1px);
+}
+
+/* --- INFO PROFIL --- */
+.profile-info {
+  padding: 12px 24px 0;
+}
+
+/* Nama besar */
+.profile-name {
+  font-size: 1.5rem; /* Ganti ukuran nama */
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Username/handle (@...) */
+.profile-handle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+/* Bio singkat */
+.profile-bio {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 12px;
+}
+
+/* Meta info (lokasi, link, dll) */
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* --- STATISTIK PROFIL ---
+   (Jumlah karya, anggota, dll)
+*/
+.profile-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Angka besar statistik */
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Label di bawah angka */
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* =====================================================
+   6. FEED / TIMELINE (HOME)
+   Mirip timeline Twitter di bawah profil
+===================================================== */
+.feed-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* Tab filter (Terbaru / Populer / Pinned) */
+.feed-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.feed-tab {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.feed-tab:hover {
+  color: var(--text-primary);
+}
+
+/* Tab yang sedang aktif */
+.feed-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* --- FEED CARD --- */
+.feed-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+  position: relative;
+  animation: fadeUp 0.4s ease both;
+}
+
+.feed-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hov);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Card yang dipin (pinned) */
+.feed-card.pinned {
+  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.04);
+}
+
+/* Badge "Dipin" */
+.card-pin-badge {
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Label kategori (Pengumuman, Prestasi, dll) */
+.card-category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+/* Judul kartu */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+/* Teks kutipan / excerpt */
+.card-excerpt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  /* Batasi ke 3 baris */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer kartu (tanggal, tag, tombol) */
+.card-footer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+/* Tags */
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: rgba(20, 184, 166, 0.1);
+  color: var(--color-primary);
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+/* Tombol "Baca Selengkapnya" */
+.btn-read {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(20, 184, 166, 0.3);
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.btn-read:hover {
+  background: rgba(20, 184, 166, 0.1);
+  border-color: var(--color-primary);
+}
+
+/* =====================================================
+   7. HALAMAN INNER (shared styles)
+   Dipakai oleh: Tentang, Kegiatan, Galeri, Blog
+===================================================== */
+.inner-page-header {
+  padding: 60px 32px 40px;
+  text-align: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.inner-page-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  /* Ganti warna judul halaman inner */
+  background: linear-gradient(
+    135deg,
+    var(--text-primary),
+    var(--color-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.inner-page-header p {
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+/* Wrapper konten dalam halaman inner */
+.content-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+/* Label section kecil (misal: "Identitas", "Organisasi") */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+/* =====================================================
+   8. TENTANG KAMI
+===================================================== */
+.about-section {
+  margin-bottom: 40px;
+}
+
+.about-section h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.about-section p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+/* Grid visi-misi (2 kolom) */
+.visi-misi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+/* Kartu visi/misi */
+.vm-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+
+.vm-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* Emoji ikon di kartu visi/misi */
+.vm-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.vm-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.vm-card p,
+.vm-card ul {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.vm-card ul {
+  padding-left: 16px;
+  list-style: disc;
+}
+.vm-card ul li {
+  margin-bottom: 4px;
+}
+
+/* Grid pengurus */
+.pengurus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.pengurus-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.2s;
+}
+
+.pengurus-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* Avatar inisial pengurus */
+.pengurus-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-dk)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.pengurus-info {
+  display: flex;
+  flex-direction: column;
+}
+.pengurus-info strong {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+}
+.pengurus-info span {
+  font-size: 0.77rem;
+  color: var(--text-muted);
+}
+
+/* =====================================================
+   9. KEGIATAN
+===================================================== */
+.kegiatan-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Kartu kegiatan */
+.kegiatan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+  animation: fadeUp 0.3s ease both;
+}
+
+.kegiatan-card:hover {
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+}
+
+/* Emoji ikon besar di kartu kegiatan */
+.kegiatan-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  background: rgba(20, 184, 166, 0.08);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kegiatan-body {
+  flex: 1;
+}
+
+.kegiatan-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.kegiatan-body p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Meta info tanggal & lokasi */
+.kegiatan-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+/* Badge status kegiatan */
+.kegiatan-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Warna badge status — ganti sesuai branding */
+.badge-upcoming {
+  background: rgba(20, 184, 166, 0.15);
+  color: var(--color-primary);
+}
+.badge-ongoing {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-secondary);
+}
+.badge-done {
+  background: rgba(100, 116, 139, 0.15);
+  color: #64748b;
+}
+
+/* =====================================================
+   10. GALERI
+===================================================== */
+
+/* Tombol filter */
+.galeri-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  padding: 7px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #000;
+}
+
+/* Masonry-style grid galeri */
+.galeri-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 180px; /* Ganti angka ini untuk ubah tinggi baris foto */
+  gap: 12px;
+}
+
+/* Item galeri yang menempati 2 kolom */
+.galeri-wide {
+  grid-column: span 2;
+}
+/* Item galeri yang menempati 2 baris */
+.galeri-tall {
+  grid-row: span 2;
+}
+
+/* Item galeri */
+.galeri-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Gambar (background) dalam item galeri */
+.galeri-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.galeri-item:hover .galeri-img {
+  transform: scale(1.05);
+}
+
+/* Placeholder emoji (sementara sebelum ada foto asli) */
+.galeri-placeholder {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+
+/* Caption foto galeri */
+.galeri-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  font-size: 0.78rem;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.galeri-item:hover .galeri-caption {
+  opacity: 1;
+}
+
+/* =====================================================
+   11. BLOG LIST
+===================================================== */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Item di daftar blog */
+.blog-list-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: var(--radius-sm);
+}
+
+.blog-list-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+  padding-left: 8px;
+}
+
+/* Thumbnail artikel blog */
+.blog-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.blog-info {
+  flex: 1;
+}
+
+/* Label kategori artikel */
+.blog-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+}
+
+.blog-info h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 4px 0 6px;
+  line-height: 1.3;
+}
+
+.blog-info p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  /* Batasi ke 2 baris */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+/* Meta info penulis & tanggal */
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* =====================================================
+   12. BLOG DETAIL (Halaman baca artikel penuh)
+===================================================== */
+
+/* Tombol kembali ke daftar blog */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: 8px 0;
+  margin-bottom: 24px;
+  transition: gap 0.2s;
+}
+.btn-back:hover {
+  gap: 10px;
+}
+
+/* Kontainer konten artikel */
+.blog-post-content {
+}
+
+/* Header artikel */
+.post-header {
+  margin-bottom: 32px;
+}
+
+.post-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+/* Judul artikel besar */
+.post-title {
+  font-size: 2rem; /* Ganti ukuran judul artikel */
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+/* Metadata penulis dan tanggal */
+.post-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Body teks artikel */
+.post-body {
+  font-size: 0.97rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+}
+
+.post-body p {
+  margin-bottom: 20px;
+}
+
+/* Heading dalam artikel */
+.post-body h2 {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  margin: 28px 0 12px;
+}
+
+/* List dalam artikel */
+.post-body ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+  list-style: disc;
+}
+.post-body ul li {
+  margin-bottom: 6px;
+}
+
+/* Quote/blockquote dalam artikel */
+.post-body blockquote {
+  border-left: 3px solid var(--color-primary);
+  padding-left: 16px;
+  margin: 20px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* =====================================================
+   13. FOOTER
+===================================================== */
+.footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 32px 32px 20px;
+}
+
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.footer-brand p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* =====================================================
+   14. ANIMATIONS
+   Hapus atau kurangi jika ingin tampilan lebih diam
+===================================================== */
+
+/* Muncul dari bawah ke atas */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Turun dari atas (untuk mobile menu) */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi saat halaman muncul */
+.active-page {
+  animation: fadeUp 0.35s ease both;
+}
+
+/* =====================================================
+   15. RESPONSIVE — MOBILE
+   Breakpoint utama: 768px (tablet ke bawah)
+   Breakpoint kecil: 480px (ponsel kecil)
+===================================================== */
+@media (max-width: 768px) {
+  /* Sembunyikan link navbar, tampilkan hamburger */
+  .nav-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  /* Banner lebih pendek di mobile */
+  .profile-banner {
+    height: 140px;
+  }
+
+  .profile-top-bar {
+    padding: 0 16px;
+    margin-top: -32px;
+  }
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+  }
+  .profile-actions {
+    gap: 6px;
+  }
+  .btn-outline,
+  .btn-primary {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .profile-info {
+    padding: 10px 16px 0;
+  }
+  .profile-name {
+    font-size: 1.2rem;
+  }
+  .profile-stats {
+    gap: 16px;
+  }
+
+  .feed-section {
+    padding: 0 12px 32px;
+  }
+
+  /* Visi misi 1 kolom di mobile */
+  .visi-misi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Pengurus 2 kolom di mobile */
+  .pengurus-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Galeri 2 kolom di mobile */
+  .galeri-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 140px;
+  }
+  .galeri-wide {
+    grid-column: span 1;
+  }
+
+  .inner-page-header {
+    padding: 40px 20px 24px;
+  }
+  .inner-page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .content-wrapper {
+    padding: 0 16px 40px;
+  }
+
+  .post-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-stats {
+    gap: 12px;
+  }
+  .stat-num {
+    font-size: 1.1rem;
+  }
+
+  /* Pengurus 1 kolom di ponsel kecil */
+  .pengurus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Galeri 1 kolom di ponsel kecil */
+  .galeri-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 180px;
+  }
+  .galeri-tall {
+    grid-row: span 1;
+  }
+}
